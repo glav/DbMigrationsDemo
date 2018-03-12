@@ -89,6 +89,13 @@ namespace Demo.Migrations
                     bool functionsDirExist = System.IO.Directory.Exists(db.FunctionsDirectory);
                     bool viewsDirExist = System.IO.Directory.Exists(db.ViewsDirectory);
                     bool sprocsDirExist = System.IO.Directory.Exists(db.StoredProceduresDirectory);
+                    bool nothingToMigrate = !functionsDirExist && !viewsDirExist && !sprocsDirExist;
+
+                    if (nothingToMigrate)
+                    {
+                        Logger.LogMessage("Nothing detected in static assets to update/migrate.");
+                        return 0;
+                    }
 
                     Logger.LogMessage($"Database: [{db.DatabaseName}], updating static assets (functions, views, stored procedures");
                     var staticUpgraderConfig =
@@ -98,10 +105,12 @@ namespace Demo.Migrations
                     if (functionsDirExist) { staticUpgraderConfig = staticUpgraderConfig.WithScriptsFromFileSystem(db.FunctionsDirectory); }
                     if (viewsDirExist) { staticUpgraderConfig = staticUpgraderConfig.WithScriptsFromFileSystem(db.ViewsDirectory); }
                     if (sprocsDirExist) { staticUpgraderConfig = staticUpgraderConfig.WithScriptsFromFileSystem(db.StoredProceduresDirectory); }
+
                     var staticUpgrader = staticUpgraderConfig.WithExecutionTimeout(timeout)
                             .JournalTo(new NullJournal())
                             .LogToConsole()
                             .Build();
+
 
                     var resultStaticFiles = staticUpgrader.PerformUpgrade();
                     if (!resultStaticFiles.Successful)

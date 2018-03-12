@@ -83,9 +83,6 @@ namespace Demo.Migrations
                     if (!result.Successful)
                     {
                         Logger.LogMessage(result.Error.Message, true);
-#if DEBUG
-                        Console.ReadLine();
-#endif
                         return -1;
                     }
 

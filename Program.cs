@@ -86,19 +86,24 @@ namespace Demo.Migrations
                         return -1;
                     }
 
+                    bool functionsDirExist = System.IO.Directory.Exists(db.FunctionsDirectory);
+                    bool viewsDirExist = System.IO.Directory.Exists(db.ViewsDirectory);
+                    bool sprocsDirExist = System.IO.Directory.Exists(db.StoredProceduresDirectory);
+
                     Logger.LogMessage($"Database: [{db.DatabaseName}], updating static assets (functions, views, stored procedures");
-                    upgrader =
+                    var staticUpgraderConfig =
                         DeployChanges.To
-                            .SqlDatabase(db.ConnectionString)
-                            .WithScriptsFromFileSystem(db.FunctionsDirectory)
-                            .WithScriptsFromFileSystem(db.ViewsDirectory)
-                            .WithScriptsFromFileSystem(db.StoredProceduresDirectory)
-                            .WithExecutionTimeout(timeout)
+                            .SqlDatabase(db.ConnectionString);
+
+                    if (functionsDirExist) { staticUpgraderConfig = staticUpgraderConfig.WithScriptsFromFileSystem(db.FunctionsDirectory); }
+                    if (viewsDirExist) { staticUpgraderConfig = staticUpgraderConfig.WithScriptsFromFileSystem(db.ViewsDirectory); }
+                    if (sprocsDirExist) { staticUpgraderConfig = staticUpgraderConfig.WithScriptsFromFileSystem(db.StoredProceduresDirectory); }
+                    var staticUpgrader = staticUpgraderConfig.WithExecutionTimeout(timeout)
                             .JournalTo(new NullJournal())
                             .LogToConsole()
                             .Build();
 
-                    var resultStaticFiles = upgrader.PerformUpgrade();
+                    var resultStaticFiles = staticUpgrader.PerformUpgrade();
                     if (!resultStaticFiles.Successful)
                     {
                         Logger.LogMessage(resultStaticFiles.Error.Message, true);

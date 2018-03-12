@@ -98,6 +98,13 @@ namespace Demo.Migrations
                             .LogToConsole()
                             .Build();
 
+                    var resultStaticFiles = upgrader.PerformUpgrade();
+                    if (!resultStaticFiles.Successful)
+                    {
+                        Logger.LogMessage(resultStaticFiles.Error.Message, true);
+                        return -1;
+                    }
+
                 }
 
                 Logger.LogMessage("Success!");

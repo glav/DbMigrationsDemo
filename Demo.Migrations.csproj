@@ -87,6 +87,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SqlScripts\TestDatabase\Migrations\010003_NewTableBlammo.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SqlScripts\TestDatabase\Migrations\000001_BaselineDbCreate.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

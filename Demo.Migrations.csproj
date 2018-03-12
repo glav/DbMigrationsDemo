@@ -138,7 +138,7 @@
   </Target>
   -->
   <UsingTask TaskName="TransformXml" AssemblyFile="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v14.0\Web\Microsoft.Web.Publishing.Tasks.dll" />
-  <Target Name="AfterCompile" Condition="exists('app.$(Configuration).config')">
+  <!--<Target Name="AfterCompile" Condition="exists('app.$(Configuration).config')">
     <TransformXml Source="app.config" Destination="$(IntermediateOutputPath)$(TargetFileName).config" Transform="app.$(Configuration).config" />
     <ItemGroup>
       <AppConfigWithTargetPath Remove="app.config" />
@@ -149,7 +149,7 @@
         <TargetPath>$(TargetName).vshost$(TargetExt).config</TargetPath>
       </AppConfigWithTargetPath>
     </ItemGroup>
-  </Target>
+  </Target>-->
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>

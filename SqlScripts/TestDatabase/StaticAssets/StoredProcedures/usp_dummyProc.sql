@@ -23,7 +23,7 @@ GO
 ALTER PROCEDURE [dbo].[usp_dummyProc] 
 AS
 BEGIN
-	SELECT * FROM [test].[TableOne]
+	SELECT * FROM [anotherschema].[SomeTable]
 END
 GO
 

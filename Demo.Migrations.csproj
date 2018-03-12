@@ -99,7 +99,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SqlScripts\AnotherDatabase\StaticAssets\Functions\" />
-    <Folder Include="SqlScripts\AnotherDatabase\StaticAssets\StoredProcedures\" />
     <Folder Include="SqlScripts\AnotherDatabase\StaticAssets\Views\" />
     <Folder Include="SqlScripts\TestDatabase\StaticAssets\Functions\" />
     <Folder Include="SqlScripts\TestDatabase\StaticAssets\StoredProcedures\" />
@@ -128,6 +127,11 @@
   <ItemGroup>
     <None Include="SqlScripts\AnotherDatabase\Migrations\001002_SomeFix.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SqlScripts\AnotherDatabase\StaticAssets\StoredProcedures\usp_someProc.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -94,6 +94,7 @@ namespace Demo.Migrations
                             .WithScriptsFromFileSystem(db.ViewsDirectory)
                             .WithScriptsFromFileSystem(db.StoredProceduresDirectory)
                             .WithExecutionTimeout(timeout)
+                            .JournalTo(new NullJournal())
                             .LogToConsole()
                             .Build();
 
@@ -111,7 +112,7 @@ namespace Demo.Migrations
 
         private static string MaskedConnectionString(string connectionString)
         {
-            var userIdPos = connectionString.ToLower(CultureInfo.InvariantCulture).IndexOf("user id", StringComparison.InvariantCultureIgnoreCase);
+            var userIdPos = connectionString.ToLower(CultureInfo.InvariantCulture).IndexOf("user=", StringComparison.InvariantCultureIgnoreCase);
             var viewableConnectionString =
                     (userIdPos > 0)
                         ? connectionString.Substring(0, userIdPos - 1)

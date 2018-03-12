@@ -84,9 +84,15 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SqlScripts\TestDatabase\Migrations\000001_BaselineDbCreate.sql" />
-    <EmbeddedResource Include="SqlScripts\TestDatabase\Migrations\001001_FeatureX.sql" />
-    <EmbeddedResource Include="SqlScripts\TestDatabase\Migrations\001002_Bug123.sql" />
+    <None Include="SqlScripts\TestDatabase\Migrations\000001_BaselineDbCreate.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SqlScripts\TestDatabase\Migrations\001001_FeatureX.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="SqlScripts\TestDatabase\Migrations\001002_Bug123.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SqlScripts\AnotherDatabase\StaticAssets\Functions\" />
@@ -97,23 +103,29 @@
     <Folder Include="SqlScripts\TestDatabase\StaticAssets\Views\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SqlScripts\TestDatabase\PostScripts\PostDbUpgrade.sql">
+    <None Include="SqlScripts\TestDatabase\PostScripts\PostDbUpgrade.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SqlScripts\AnotherDatabase\PostScripts\PostDbUpgrade.sql">
+    <None Include="SqlScripts\AnotherDatabase\PostScripts\PostDbUpgrade.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SqlScripts\AnotherDatabase\Migrations\000001_BaselineDbCreate.sql" />
+    <None Include="SqlScripts\AnotherDatabase\Migrations\000001_BaselineDbCreate.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SqlScripts\AnotherDatabase\Migrations\001001_FeatureBlah.sql" />
+    <None Include="SqlScripts\AnotherDatabase\Migrations\001001_FeatureBlah.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="SqlScripts\AnotherDatabase\Migrations\001002_SomeFix.sql" />
+    <None Include="SqlScripts\AnotherDatabase\Migrations\001002_SomeFix.sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />

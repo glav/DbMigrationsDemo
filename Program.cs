@@ -66,42 +66,50 @@ namespace Demo.Migrations
         {
             var timeout = TimeSpan.FromSeconds(GetTimeoutValue());
 
-            foreach (var db in databasesToMigrate)
+            try
             {
-                Logger.LogMessage($"Database: [{db.DatabaseName}], migrating...");
-                var upgrader =
-                    DeployChanges.To
-                        .SqlDatabase(db.ConnectionString)
-                        .WithScriptsFromFileSystem(db.DirectoryForMigrationScripts)
-                        .WithExecutionTimeout(timeout)
-                        .LogToConsole()
-                        .Build();
-
-                var result = upgrader.PerformUpgrade();
-                if (!result.Successful)
+                foreach (var db in databasesToMigrate)
                 {
-                    Logger.LogMessage(result.Error.Message, true);
+                    Logger.LogMessage($"Database: [{db.DatabaseName}], migrating...");
+                    var upgrader =
+                        DeployChanges.To
+                            .SqlDatabase(db.ConnectionString)
+                            .WithScriptsFromFileSystem(db.DirectoryForMigrationScripts)
+                            .WithExecutionTimeout(timeout)
+                            .LogToConsole()
+                            .Build();
+
+                    var result = upgrader.PerformUpgrade();
+                    if (!result.Successful)
+                    {
+                        Logger.LogMessage(result.Error.Message, true);
 #if DEBUG
-                    Console.ReadLine();
+                        Console.ReadLine();
 #endif
-                    return -1;
+                        return -1;
+                    }
+
+                    Logger.LogMessage($"Database: [{db.DatabaseName}], updating static assets (functions, views, stored procedures");
+                    upgrader =
+                        DeployChanges.To
+                            .SqlDatabase(db.ConnectionString)
+                            .WithScriptsFromFileSystem(db.FunctionsDirectory)
+                            .WithScriptsFromFileSystem(db.ViewsDirectory)
+                            .WithScriptsFromFileSystem(db.StoredProceduresDirectory)
+                            .WithExecutionTimeout(timeout)
+                            .LogToConsole()
+                            .Build();
+
                 }
 
-                Logger.LogMessage($"Database: [{db.DatabaseName}], updating static assets (functions, views, stored procedures");
-                upgrader =
-                    DeployChanges.To
-                        .SqlDatabase(db.ConnectionString)
-                        .WithScriptsFromFileSystem(db.FunctionsDirectory)
-                        .WithScriptsFromFileSystem(db.ViewsDirectory)
-                        .WithScriptsFromFileSystem(db.StoredProceduresDirectory)
-                        .WithExecutionTimeout(timeout)
-                        .LogToConsole()
-                        .Build();
-
+                Logger.LogMessage("Success!");
+            } catch (Exception ex)
+            {
+                Logger.LogMessage($"Error! {ex.Message}");
+                return -1;
             }
-
-            Logger.LogMessage("Success!");
             return 0;
+
         }
 
         private static string MaskedConnectionString(string connectionString)

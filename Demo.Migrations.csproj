@@ -87,6 +87,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SqlScripts\AnotherDatabase\Migrations\001004_NewTableFourFive.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SqlScripts\AnotherDatabase\Migrations\001003_NewTableOneTwoThree.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

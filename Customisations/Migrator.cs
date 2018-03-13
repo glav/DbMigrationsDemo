@@ -88,7 +88,7 @@ namespace Demo.Migrations.Customisations
         private static int RunPostScriptIfNotInDebugMode(DatabaseDetails dbDetails)
         {
 #if DEBUG
-            Logger.LogMessage("In DEBUG mode, not executing user creation script");
+            Logger.LogMessage("In DEBUG mode, not executing POST creation script");
 #else
             Logger.LogMessage("Not in DEBUG mode, about to execute POST creation script");
             var postCreator =

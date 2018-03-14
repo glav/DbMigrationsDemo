@@ -106,6 +106,9 @@
     <Content Include="SqlScripts\TestDatabase\Migrations\001002_Bug123.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SqlScripts\TestDatabase\StaticAssets\StoredProcedures\usp_dummyProc2.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="SqlScripts\AnotherDatabase\StaticAssets\Functions\" />

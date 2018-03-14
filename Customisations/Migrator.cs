@@ -42,7 +42,7 @@ namespace Demo.Migrations.Customisations
                     if (nothingToMigrate)
                     {
                         Logger.LogMessage("Nothing detected in static assets to update/migrate.");
-                        return 0;
+                        continue;
                     }
 
                     Logger.LogMessage($"Database: [{db.DatabaseName}], updating static assets (functions, views, stored procedures");
@@ -68,7 +68,12 @@ namespace Demo.Migrations.Customisations
                     }
 
                     Logger.LogMessage(">> Performing POST DbMigration");
-                    return RunPostScriptIfNotInDebugMode(db);
+                    var postStatus = RunPostScriptIfNotInDebugMode(db);
+                    if (postStatus < 0)
+                    {
+                        // if an error, return and stop
+                        return postStatus;
+                    }
 
 
 

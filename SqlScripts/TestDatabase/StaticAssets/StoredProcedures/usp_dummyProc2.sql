@@ -1,5 +1,5 @@
 ﻿/****** Object:  StoredProcedure [dbo].[usp_someProc]    Script Date: 12/03/2018 6:11:46 PM ******/
-DROP PROCEDURE IF EXISTS [dbo].[usp_dummyProc]
+DROP PROCEDURE IF EXISTS [dbo].[usp_dummyProc2]
 GO
 
 /****** Object:  StoredProcedure [dbo].[usp_someProc]    Script Date: 12/03/2018 6:11:46 PM ******/

@@ -94,6 +94,9 @@
     <Content Include="SqlScripts\AnotherDatabase\Migrations\001003_NewTableOneTwoThree.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="SqlScripts\AnotherDatabase\StaticAssets\StoredProcedures\usp_someProc3.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="SqlScripts\AnotherDatabase\StaticAssets\StoredProcedures\usp_someProc2.sql">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

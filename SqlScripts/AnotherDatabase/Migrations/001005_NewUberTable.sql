@@ -1,5 +1,5 @@
 
-IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[stuff].[FourFive]') AND type in (N'U'))
+IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[stuff].[Uber]') AND type in (N'U'))
 BEGIN
 CREATE TABLE [stuff].[Uber](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
